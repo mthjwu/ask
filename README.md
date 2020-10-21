@@ -25,7 +25,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 ```
 * create a environment with the prequired python packages
 ```
-conda create -n ask --no-channel-priority pysam, pandas, numpy, statsmodels, matplotlib, seaborn
+conda create -n ask --no-channel-priority pysam pandas numpy matplotlib statsmodels seaborn
 ```
 * activate environment
 ```
