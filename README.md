@@ -1,4 +1,6 @@
 # ask #
+Latest Release:
+* Github: v0.0.2.dev9
 
 Seek amplicons from high throughput sequencing data 
 
