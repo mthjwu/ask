@@ -34,7 +34,7 @@ Now, you are ready to run ask
 ### How to run from bam file? ###
 * run ask from sorted, deduplicated bam files with index file in the same folder (see below for how to generate such bam file)
 ```
-<ask_dir>/ask_cmd.py -i test.bam -o test_ask/test_ask
+<ask_dir>/ask/ask_cmd.py -i test.bam -o test_ask/test_ask
 ```
 
 ### How to prepare bam file? ###
