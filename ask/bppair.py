@@ -74,7 +74,8 @@ def bp_refine(bp_pair, bp_cand_stats, cn_amp):
     bp_df = bp_df.drop_duplicates()
 
     # add clip depth to stats
-    bp_stats = pd.merge(bp_df, bp_cand_stats, on=['Chrom', 'Coord', 'Clip'])
+    bp_stats = pd.merge(bp_df, bp_cand_stats,
+                        on=['Chrom', 'Coord', 'Clip'], how='left')
 
     # breakpoints from amplified segments
     ## merge adjacent segments into one

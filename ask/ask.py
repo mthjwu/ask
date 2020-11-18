@@ -129,7 +129,7 @@ def detect_amplified_segment(bin_count, bp_all, blfile = None, genefile = None,
 #------------------------------------------------------------------------------#
 def detect_bp_pair(bamfile, bp_all, cn_amp,
                    blfile = None, bp_min_clip = 10,
-                   binsize = 10000, max_n_bp = 2000, clean_bp_perc = 0.2,
+                   binsize = 10000, max_n_bp = 500, clean_bp_perc = 0.2,
                    only_keep_clean_bp = True, min_nt = 5,
                    mapq = 1, nmmax = 3):
     """ from breakpoint list to breakpoint pairs

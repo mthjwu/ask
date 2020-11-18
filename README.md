@@ -1,9 +1,9 @@
 # ask #
 
-Seek amplicons from high throughput sequencing data 
+Seek amplicons from high throughput sequencing data
 
 Latest Release:
-* Github: v0.0.2.dev9
+* Github: v0.0.2.dev10
 
 ### How to download? ###
 
@@ -15,15 +15,15 @@ git clone https://github.com/mthjwu/ask
 ### Software dependencies ###
 * The software has been tested in MacOSX and Linux system.
 * The software does not depend on any other softwares except some basic python packages.
-* Prequired python packages: pysam, pandas, numpy, statsmodels, matplotlib, seaborn
+* Pre-required python packages: pysam, pandas, numpy, statsmodels, matplotlib, seaborn
 
 
-### How to install python ###
+### How to install python and pre-required packages ###
 * install Miniconda by following https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
 ```
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
-* create a environment with the prequired python packages
+* create a environment with the pre-required python packages
 ```
 conda create -n ask --no-channel-priority pysam pandas numpy matplotlib statsmodels seaborn
 ```
@@ -37,7 +37,7 @@ Now, you are ready to run ask
 ### How to run from bam file? ###
 * run ask from sorted, deduplicated bam files with index file in the same folder (see below for how to generate such bam file)
 ```
-<ask_dir>/ask/ask_cmd.py -i test.bam -o test_ask/test_ask
+<ask_dir>/ask/ask_cmd.py -i test.bam -o test_ask/test -g hg19
 ```
 
 ### How to prepare bam file? ###
@@ -58,4 +58,3 @@ samtools fixmate --threads 5 -m test_unsorted.bam - \
 ```
 samtools index test.bam
 ```
-
