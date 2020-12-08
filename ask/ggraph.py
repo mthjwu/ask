@@ -222,7 +222,7 @@ class GGraph:
             for i in range(len(op_seg)):
                 row_seg = op_seg[i]
                 row_bpp = op_bpp[i]
-                
+
                 if (row_seg[2] == 'L'):
                     op.append([row_seg[0], row_seg[1], row_seg[4], \
                         '+', row_bpp[1], row_seg[7], tag + str(idx)])
@@ -267,22 +267,25 @@ class GGraph:
             self.node_dict[row[1:4]] = row[0]
 
         for row in bp_pair.itertuples():
-            a = self.node_dict[row[1:4]]
-            b = self.node_dict[row[4:7]]
-            w = ('outer', row[7])
-            self.add_edge(a, b, w)
+            if row[1:4] in self.node_dict and row[4:7] in self.node_dict:
+                a = self.node_dict[row[1:4]]
+                b = self.node_dict[row[4:7]]
+                w = ('outer', row[7])
+                self.add_edge(a, b, w)
 
         for row in seg.itertuples():
-            a = self.node_dict[(row[1], row[2], 'L')]
-            b = self.node_dict[(row[1], row[3], 'R')]
-            w = ('inner', row[4])
-            # if already exist, it's a single segment loop
-            if (a, b) in self.edges:
-                self.single_segment_loop.append([row[1], row[2], row[3], \
-                    '+', self.edges[(a, b)][1], row[4]])
-                # don't add inner in this case
-            else:
-                self.add_edge(a, b, w)
+            if (row[1], row[2], 'L') in self.node_dict and \
+                (row[1], row[3], 'R') in self.node_dict:
+                a = self.node_dict[(row[1], row[2], 'L')]
+                b = self.node_dict[(row[1], row[3], 'R')]
+                w = ('inner', row[4])
+                # if already exist, it's a single segment loop
+                if (a, b) in self.edges:
+                    self.single_segment_loop.append([row[1], row[2], row[3], \
+                        '+', self.edges[(a, b)][1], row[4]])
+                    # don't add inner in this case
+                else:
+                    self.add_edge(a, b, w)
 
 
     #--------------------------------------------------------------------------#

@@ -95,10 +95,11 @@ def bp_refine(bp_pair, bp_cand_stats, cn_amp):
         if (R not in bplist):
             op.append([row[0], row[2], 'R', True, cn_amp_clip[R], 0, 0])
     cn_seg_df = pd.DataFrame(op, columns=bp_stats.columns)
-    cn_seg_df
+    # cn_seg_df
 
     # merge and output
     df = pd.concat([bp_stats, cn_seg_df])
+    df = df[pd.notnull(df.CleanBP)]
     df = df.drop_duplicates().sort_values(['Chrom', 'Coord', 'Clip'])
     return df.reset_index(drop=True)
 
@@ -202,16 +203,17 @@ def add_cn(df, cn_amp):
     gr1 = GRange(df[['Chrom', 'Start', 'End']], 'dataframe_hasend')
     gr2 = GRange(cn_amp, 'dataframe_hasend')
 
-    # only use the mid point for the segments
-    op = []
-    for i in gr1.gr:
-        mid = int((i[1].start + i[1].stop)/2)
-        op.append((i[0], range(mid, mid+1), i[2]))
-    gr1.gr = op
+    # # only use the mid point for the segments
+    # op = []
+    # for i in gr1.gr:
+    #     mid = int((i[1].start + i[1].stop)/2)
+    #     op.append((i[0], range(mid, mid+1), i[2]))
+    # gr1.gr = op
 
     # extend binsize on both end of the cn_seg
-    map_list = gr1.gmap(gr2, a_extend = 0, b_extend = 0)
+    map_list = gr1.gmap(gr2, a_extend = 0, b_extend = 0, multi_hit = True)
 
     # output
-    df['CN'] = [round(i[0]) if (i is not None) else None for i in map_list]
+    df['CN'] = [round(np.max([j[0] for j in i]))
+        if (i is not None and i != []) else 0 for i in map_list]
     return df
