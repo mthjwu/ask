@@ -23,6 +23,12 @@ git clone https://github.com/mthjwu/ask
 ```
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
+* setup bioconda channels
+```
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+```
 * create a environment with the pre-required python packages
 ```
 conda create -n ask --no-channel-priority pysam pandas numpy matplotlib statsmodels seaborn
